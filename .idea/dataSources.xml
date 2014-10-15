@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2430786219">
+    <data-source source="LOCAL" name="Rails todo_app: development" uuid="d706b273-d8d6-4bfb-8937-cedde88b7c48">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:tod_db</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails todo_app: test" uuid="fc8ec1fe-48a2-449d-91aa-ca0a5fa6e6ee">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:tod_db</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails todo_app: production" uuid="c848f7f5-881d-4ecf-bb66-ca8beb9f38af">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:tod_db</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
