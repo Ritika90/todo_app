@@ -1,43 +1,66 @@
 <title>Shared Todo App </title>
-<div class="container">
-  <div class="row">
-    <div class="span4">
-<h1>Shared Todo App</h1>
-<hr>
-<p>All your todos here</p>
-      <%= form_for @new_todo, :url => { :action => "add" }  do |f|  %>
-          <%= f.text_field :todo_item %>
-          <%= f.submit "Add todo", class: "btn btn-primary" %>
-      <% end %>
-      <% if !flash[:error].nil? %>
-          <div class="alert alert-error">
-            <button type="button" class="close" data-dismiss="alert" >×</button>
-            <strong><%= flash[:error] %></strong>
-          </div>
-      <% end %>
-      <% if flash[:success] %>
-          <div class="alert alert-success">
-          <button type="button" class="close" data-dismiss="alert" >×</button>
-          <strong><%= flash[:success] %></strong>
-          </div>
-      <% end %>
-<div class="well">
-  <%= form_tag("/todos/complete/", :method => "post") do %>
-      <ul style="list-style-type:none;">
-  <% @todo_items.each do |t| %>
-            <% if t.completed == true %>
-                <li style="color:grey;"> <%= check_box_tag  "todos_checkbox[]",t.id %>  <s><%= t.todo_item %></s> </li>
-            <% else %>
-                <li> <%= check_box_tag  "todos_checkbox[]",t.id %> <%= t.todo_item %>  </li>
-            <% end %>
-  <%end%>
-  </ul>
-  <%= submit_tag("Toggle Todos", :class=>"btn btn-success") %>
-  <%end %>
+  <div class="container">
+    <div class="row">
+      <div class="span4">
+        <h1>Shared Todo App</h1>
+          <hr>
+            <p>All your todos here</p>
 
-</div> <!-- well -->
-    </div> <!-- span4 -->
+            <%= form_for @new_todo, :url => { :action => "add" }  do |f|  %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+              <%= f.text_field :todo_item %>
+              <%= f.submit "Add todo", class: "btn btn-primary" %>
+            <% end %>
+
+            <% if !flash[:error].nil? %>
+              <div class="alert alert-error" >
+                <button type="button" class="close" data-dismiss="alert" >×</button>
+                <strong><%= flash[:error] %></strong>
+              </div>
+            <% end %>
+
+            <% if flash[:success] %>
+              <div class="alert alert-success" id="notice" >
+                <button type="button" class="close" data-dismiss="alert" >×</button>
+                <strong><%= flash[:success] %></strong>
+              </div>
+            <% end %>
+
+            <div class="well">
+              <button type="button" id="check_all" >
+                <%= button_to "Done All", :action => :complete_all, :remote => true,  :id => "check_all"%>
+                  </button>
+
+               <button type="button" id="uncheck_all" >
+                <%= button_to "Reset All", :action => :reset_all, :remote => true %>
+                    </button>
+
+              <%= form_tag("/todos/complete/", :method => "post") do %>
+                <ul style="list-style-type:none;">
+                <% @todo_items.each do |t| %>
+                <% if t.completed == true %>
+                  <li style="color:grey;"> <%= check_box_tag  "todos_checkbox[]",t.id, true %>  <s><%= t.todo_item %></s> </li>
+                <% else %>
+                  <li> <%= check_box_tag  "todos_checkbox[]",t.id, false %> <%= t.todo_item %>  </li>
+                <% end %>
+                <%end%>
+                </ul>
+                <%= submit_tag("Toggle Todos", :class=>"btn btn-success") %>
+                <%= link_to "Delete last todo", todos_delete_path, :class=> "btn btn-danger"%>
+              <% end %>
+
+
+              &nbsp;&nbsp;&nbsp;&nbsp;
+
+              <script type='text/javascript'>
+ //               $('#check_all').on("click", function(){ $('input[type="checkbox"]').click() });
+//                $('#uncheck_all').on("click", function(){ $('input[type="checkbox"]').click(); });
+                $('#notice').fadeOut(5000);
+              </script>
+
+            </div> <!-- well -->
+      </div> <!-- span4 -->
   </div> <!-- row -->
 </div> <!-- container -->
 
-<%= link_to "Delete last todo", todos_delete_path %>
+

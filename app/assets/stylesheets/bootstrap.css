@@ -6154,6 +6154,19 @@ a.badge:focus {
   display: none;
 }
 
+#check_all{
+    float: right;
+    width: 80px;
+    height: 35px;
+}
+
+#uncheck_all{
+    float: right;
+    width: 80px;
+    height: 35px;
+}
+
+
 .show {
   display: block;
 }

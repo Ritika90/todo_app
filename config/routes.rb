@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
+
+
+  devise_for :users
   match '/todos/index',    to: 'todos#index',    via: 'get'
   get '/todos/delete',    to: 'todos#delete',    via: 'delete'
   match '/todos/add',    to: 'todos#add',    via: 'post'
   match '/todos/complete',    to: 'todos#complete',    via: 'post'
+  match '/todos/complete_all',    to: 'todos#complete_all',    via: 'post'
+  match '/todos/reset_all',    to: 'todos#reset_all',    via: 'post'
   root  'todos#index'
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
