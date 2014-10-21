@@ -22,7 +22,6 @@ class TodosController < ApplicationController
     end
 
     def complete
-      debugger
         params[:todos_checkbox].each do |todo_id|
         t = Todo.find_by_id(todo_id)
         if t.completed == true
